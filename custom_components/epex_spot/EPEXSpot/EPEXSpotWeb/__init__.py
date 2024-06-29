@@ -193,8 +193,12 @@ class EPEXSpotWeb:
             #          "ajax_page_state[libraries]": "bootstrap/popover,bootstrap/tooltip,core/html5shiv,core/jquery.form,epex/global-scripts,epex/global-styling,epex/highcharts,epex_core/data-disclaimer,epex_market_data/filters,epex_market_data/tables,eu_cookie_compliance/eu_cookie_compliance_default,statistics/drupal.statistics,system/base",  # noqa: E501
         }
 
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+        }
+
         async with self._session.post(
-            self.URL, params=params, data=data, verify_ssl=False
+            self.URL, params=params, data=data, headers=headers, verify_ssl=False
         ) as resp:
             resp.raise_for_status()
             return await resp.json()
